@@ -11,12 +11,9 @@ export function ThemeToggle({ isDark = false, onClick }: ThemeToggleProps) {
       onClick={onClick}
       aria-label="Cambiar modo claro u oscuro"
     >
-      <span className="theme-toggle__label">
-        {isDark ? 'Modo oscuro' : 'Modo claro'}
-      </span>
 
       <span className="theme-toggle__circle">
-        {isDark ? '☾' : '☼'}
+        {isDark ? '☼' : '☾' }
       </span>
     </button>
   )

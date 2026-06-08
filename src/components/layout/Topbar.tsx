@@ -1,6 +1,11 @@
 import { ThemeToggle } from '../ui/ThemeToggle'
 
-export function Topbar() {
+type TopbarProps = {
+  isDarkMode: boolean
+  onToggleTheme: () => void
+}
+
+export function Topbar({ isDarkMode, onToggleTheme }: TopbarProps) {
   return (
     <header className="topbar">
       <button className="topbar__menu-button" type="button" aria-label="Abrir menú">
@@ -16,7 +21,7 @@ export function Topbar() {
           Subir archivo
         </button>
 
-        <ThemeToggle />
+        <ThemeToggle isDark={isDarkMode} onClick={onToggleTheme} />
 
         <div className="topbar__avatar">
           <button className="topbar__avatar-button" type="button">
