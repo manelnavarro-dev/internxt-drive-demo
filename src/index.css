@@ -1,3 +1,6 @@
+@import './styles/normalize.css';
+@import './styles/files.css';
+
 *,
 *::before,
 *::after {
