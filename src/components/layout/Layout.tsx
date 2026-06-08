@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { initialFiles } from '../../data/initialFiles'
+import type { FileItem } from '../../types/file'
 import { FileGrid } from '../files/FileGrid'
 import { FileList } from '../files/FileList'
 import { Sidebar } from './Sidebar'
@@ -8,10 +9,18 @@ import { Topbar } from './Topbar'
 type ViewMode = 'grid' | 'list'
 
 export function Layout() {
+  const [files] = useState<FileItem[]>(initialFiles)
+  const [searchTerm, setSearchTerm] = useState('')
   const [viewMode, setViewMode] = useState<ViewMode>('grid')
   const [isDarkMode, setIsDarkMode] = useState(false)
 
   const isGridView = viewMode === 'grid'
+
+  const normalizedSearchTerm = searchTerm.trim().toLowerCase()
+
+  const filteredFiles = files.filter((file) =>
+    file.name.toLowerCase().includes(normalizedSearchTerm),
+  )
 
   function handleToggleView() {
     setViewMode(isGridView ? 'list' : 'grid')
@@ -29,6 +38,8 @@ export function Layout() {
         <Topbar
           isDarkMode={isDarkMode}
           onToggleTheme={handleToggleTheme}
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
         />
 
         <main className="main-content">
@@ -52,10 +63,14 @@ export function Layout() {
             </button>
           </div>
 
-          {isGridView ? (
-            <FileGrid files={initialFiles} />
+          {filteredFiles.length === 0 ? (
+            <div className="empty-state">
+              <p>No se encontraron archivos.</p>
+            </div>
+          ) : isGridView ? (
+            <FileGrid files={filteredFiles} />
           ) : (
-            <FileList files={initialFiles} />
+            <FileList files={filteredFiles} />
           )}
         </main>
       </div>

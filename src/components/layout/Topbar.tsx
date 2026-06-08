@@ -3,9 +3,16 @@ import { ThemeToggle } from '../ui/ThemeToggle'
 type TopbarProps = {
   isDarkMode: boolean
   onToggleTheme: () => void
+  searchTerm: string
+  onSearchChange: (value: string) => void
 }
 
-export function Topbar({ isDarkMode, onToggleTheme }: TopbarProps) {
+export function Topbar({
+  isDarkMode,
+  onToggleTheme,
+  searchTerm,
+  onSearchChange,
+}: TopbarProps) {
   return (
     <header className="topbar">
       <button className="topbar__menu-button" type="button" aria-label="Abrir menú">
@@ -13,7 +20,12 @@ export function Topbar({ isDarkMode, onToggleTheme }: TopbarProps) {
       </button>
 
       <div className="topbar__search">
-        <input type="text" placeholder="Buscar archivos..." />
+        <input
+          type="text"
+          placeholder="Buscar archivos..."
+          value={searchTerm}
+          onChange={(event) => onSearchChange(event.target.value)}
+        />
       </div>
 
       <div className="topbar__actions">
