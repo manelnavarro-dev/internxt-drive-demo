@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState, type ChangeEvent } from 'react'
 import { initialFiles } from '../../data/initialFiles'
 import type { FileItem } from '../../types/file'
 import { FileGrid } from '../files/FileGrid'
@@ -9,10 +9,12 @@ import { Topbar } from './Topbar'
 type ViewMode = 'grid' | 'list'
 
 export function Layout() {
-  const [files] = useState<FileItem[]>(initialFiles)
+  const [files, setFiles] = useState<FileItem[]>(initialFiles)
   const [searchTerm, setSearchTerm] = useState('')
   const [viewMode, setViewMode] = useState<ViewMode>('grid')
   const [isDarkMode, setIsDarkMode] = useState(false)
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
 
   const isGridView = viewMode === 'grid'
 
@@ -30,6 +32,30 @@ export function Layout() {
     setIsDarkMode((currentMode) => !currentMode)
   }
 
+  function handleUploadClick() {
+    fileInputRef.current?.click()
+  }
+
+  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
+    const selectedFiles = event.target.files
+
+    if (!selectedFiles) {
+      return
+    }
+
+    const newFiles: FileItem[] = Array.from(selectedFiles).map((file, index) => ({
+      id: `${Date.now()}-${index}-${file.name}`,
+      name: file.name,
+      size: file.size,
+      type: file.type || 'unknown',
+      uploadedAt: new Date().toISOString(),
+      isFolder: false,
+    }))
+    setFiles((currentFiles) => [...newFiles, ...currentFiles])
+
+    event.target.value = ''
+  }
+
   return (
     <div className="app-layout">
       <Sidebar />
@@ -40,6 +66,15 @@ export function Layout() {
           onToggleTheme={handleToggleTheme}
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
+          onUploadClick={handleUploadClick}
+        />
+
+        <input
+          ref={fileInputRef}
+          className="file-input"
+          type="file"
+          multiple
+          onChange={handleFileChange}
         />
 
         <main className="main-content">

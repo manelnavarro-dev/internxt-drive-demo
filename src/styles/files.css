@@ -185,6 +185,10 @@
   font-size: 0.95rem;
 }
 
+.file-input {
+  display: none;
+}
+
 @media (min-width: 48rem) {
   .file-grid {
     grid-template-columns: repeat(auto-fill, minmax(13.75rem, 1fr));

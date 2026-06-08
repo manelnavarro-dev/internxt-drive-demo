@@ -5,6 +5,7 @@ type TopbarProps = {
   onToggleTheme: () => void
   searchTerm: string
   onSearchChange: (value: string) => void
+  onUploadClick: () => void
 }
 
 export function Topbar({
@@ -12,6 +13,7 @@ export function Topbar({
   onToggleTheme,
   searchTerm,
   onSearchChange,
+  onUploadClick,
 }: TopbarProps) {
   return (
     <header className="topbar">
@@ -29,7 +31,11 @@ export function Topbar({
       </div>
 
       <div className="topbar__actions">
-        <button className="topbar__upload-button" type="button">
+        <button
+          className="topbar__upload-button"
+          type="button"
+          onClick={onUploadClick}
+        >
           Subir archivo
         </button>
 
