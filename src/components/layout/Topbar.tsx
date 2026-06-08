@@ -6,6 +6,7 @@ type TopbarProps = {
   searchTerm: string
   onSearchChange: (value: string) => void
   onUploadClick: () => void
+  onMenuClick: () => void
 }
 
 export function Topbar({
@@ -14,11 +15,17 @@ export function Topbar({
   searchTerm,
   onSearchChange,
   onUploadClick,
+  onMenuClick,
 }: TopbarProps) {
   return (
     <header className="topbar">
-      <button className="topbar__menu-button" type="button" aria-label="Abrir menú">
-        ☰
+      <button
+        className="topbar__menu-button"
+        type="button"
+        aria-label="Abrir menú"
+        onClick={onMenuClick}
+      >
+        <span className="topbar__menu-icon" aria-hidden="true"></span>
       </button>
 
       <div className="topbar__search">

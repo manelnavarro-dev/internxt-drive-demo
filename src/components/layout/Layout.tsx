@@ -14,6 +14,7 @@ export function Layout() {
   const [searchTerm, setSearchTerm] = useState('')
   const [viewMode, setViewMode] = useState<ViewMode>('grid')
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [fileToDelete, setFileToDelete] = useState<FileItem | null>(null)
 
   const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -32,6 +33,14 @@ export function Layout() {
 
   function handleToggleTheme() {
     setIsDarkMode((currentMode) => !currentMode)
+  }
+
+  function handleOpenSidebar() {
+    setIsSidebarOpen(true)
+  }
+
+  function handleCloseSidebar() {
+    setIsSidebarOpen(false)
   }
 
   function handleUploadClick() {
@@ -80,8 +89,17 @@ export function Layout() {
   }
 
   return (
-    <div className="app-layout">
-      <Sidebar />
+    <div className={`app-layout ${isDarkMode ? 'app-layout--dark' : ''}`}>
+      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
+
+      {isSidebarOpen && (
+        <button
+          className="sidebar-backdrop"
+          type="button"
+          aria-label="Cerrar menú"
+          onClick={handleCloseSidebar}
+        />
+      )}
 
       <div className="app-layout__content">
         <Topbar
@@ -90,6 +108,7 @@ export function Layout() {
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
           onUploadClick={handleUploadClick}
+          onMenuClick={handleOpenSidebar}
         />
 
         <input
