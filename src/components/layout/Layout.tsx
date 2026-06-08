@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { initialFiles } from '../../data/initialFiles'
 import { FileGrid } from '../files/FileGrid'
+import { FileList } from '../files/FileList'
 import { Sidebar } from './Sidebar'
 import { Topbar } from './Topbar'
 
@@ -54,9 +55,7 @@ export function Layout() {
           {isGridView ? (
             <FileGrid files={initialFiles} />
           ) : (
-            <section className="files-placeholder">
-              <p>Aquí aparecerá la vista lista en la siguiente fase.</p>
-            </section>
+            <FileList files={initialFiles} />
           )}
         </main>
       </div>
