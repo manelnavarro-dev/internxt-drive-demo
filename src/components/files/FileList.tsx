@@ -3,9 +3,10 @@ import { FileRow } from './FileRow'
 
 type FileListProps = {
   files: FileItem[]
+  onDeleteFile: (file: FileItem) => void
 }
 
-export function FileList({ files }: FileListProps) {
+export function FileList({ files, onDeleteFile }: FileListProps) {
   return (
     <section className="file-list" aria-label="Archivos en vista de lista">
       <div className="file-list__header">
@@ -17,7 +18,11 @@ export function FileList({ files }: FileListProps) {
 
       <div className="file-list__rows">
         {files.map((file) => (
-          <FileRow key={file.id} file={file} />
+          <FileRow
+            key={file.id}
+            file={file}
+            onDeleteFile={onDeleteFile}
+          />
         ))}
       </div>
     </section>

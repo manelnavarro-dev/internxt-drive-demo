@@ -3,6 +3,7 @@ import { initialFiles } from '../../data/initialFiles'
 import type { FileItem } from '../../types/file'
 import { FileGrid } from '../files/FileGrid'
 import { FileList } from '../files/FileList'
+import { ConfirmModal } from '../ui/ConfirmModal'
 import { Sidebar } from './Sidebar'
 import { Topbar } from './Topbar'
 
@@ -13,6 +14,7 @@ export function Layout() {
   const [searchTerm, setSearchTerm] = useState('')
   const [viewMode, setViewMode] = useState<ViewMode>('grid')
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [fileToDelete, setFileToDelete] = useState<FileItem | null>(null)
 
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
@@ -51,9 +53,30 @@ export function Layout() {
       uploadedAt: new Date().toISOString(),
       isFolder: false,
     }))
+
     setFiles((currentFiles) => [...newFiles, ...currentFiles])
 
     event.target.value = ''
+  }
+
+  function handleAskDelete(file: FileItem) {
+    setFileToDelete(file)
+  }
+
+  function handleCancelDelete() {
+    setFileToDelete(null)
+  }
+
+  function handleConfirmDelete() {
+    if (!fileToDelete) {
+      return
+    }
+
+    setFiles((currentFiles) =>
+      currentFiles.filter((file) => file.id !== fileToDelete.id),
+    )
+
+    setFileToDelete(null)
   }
 
   return (
@@ -103,12 +126,20 @@ export function Layout() {
               <p>No se encontraron archivos.</p>
             </div>
           ) : isGridView ? (
-            <FileGrid files={filteredFiles} />
+            <FileGrid files={filteredFiles} onDeleteFile={handleAskDelete} />
           ) : (
-            <FileList files={filteredFiles} />
+            <FileList files={filteredFiles} onDeleteFile={handleAskDelete} />
           )}
         </main>
       </div>
+
+      {fileToDelete && (
+        <ConfirmModal
+          fileName={fileToDelete.name}
+          onCancel={handleCancelDelete}
+          onConfirm={handleConfirmDelete}
+        />
+      )}
     </div>
   )
 }

@@ -5,9 +5,10 @@ import { FileIcon } from './FileIcon'
 
 type FileCardProps = {
     file: FileItem
+    onDeleteFile: (file: FileItem) => void
 }
 
-export function FileCard({ file }: FileCardProps) {
+export function FileCard({ file, onDeleteFile }: FileCardProps) {
     const iconType = getFileIconType(file)
 
     const uploadedDate = file.uploadedAt
@@ -17,8 +18,13 @@ export function FileCard({ file }: FileCardProps) {
             <div className="file-card__top">
                 <FileIcon type={iconType} />
 
-                <button className="file-card__action" type="button" aria-label="Eliminar archivo">
-                    ⋯
+                <button
+                    className="file-card__action"
+                    type="button"
+                    aria-label={`Eliminar ${file.name}`}
+                    onClick={() => onDeleteFile(file)}
+                >
+                    <span className="file-card__delete-icon" />
                 </button>
             </div>
 
