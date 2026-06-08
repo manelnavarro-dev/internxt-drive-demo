@@ -12,7 +12,7 @@ export function ThemeToggle({ isDark = false, onClick }: ThemeToggleProps) {
       aria-label="Cambiar modo claro u oscuro"
     >
       <span className="theme-toggle__label">
-        {isDark ? 'Night mode' : 'Day mode'}
+        {isDark ? 'Modo oscuro' : 'Modo claro'}
       </span>
 
       <span className="theme-toggle__circle">
