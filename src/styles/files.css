@@ -99,6 +99,35 @@
   font-weight: 600;
 }
 
+.file-list__sort-button {
+  appearance: none;
+  -webkit-appearance: none;
+  width: fit-content;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.file-list__sort-button:hover {
+  color: var(--color-primary);
+}
+
+.file-list__sort-button:focus {
+  outline: none;
+}
+
+.file-list__sort-button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 0.2rem;
+  border-radius: 0.25rem;
+}
+
 .file-list__rows {
   display: flex;
   flex-direction: column;
