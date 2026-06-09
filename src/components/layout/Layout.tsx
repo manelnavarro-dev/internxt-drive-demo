@@ -122,8 +122,7 @@ export function Layout() {
         <main className="main-content">
           <div className="main-content__header">
             <div>
-              <p className="main-content__eyebrow">Mi Drive</p>
-              <h1>Archivos</h1>
+              <h1>Mi Drive</h1>
             </div>
 
             <button

@@ -59,6 +59,8 @@ export function Topbar({
       </button>
 
       <div className="topbar__search">
+        <span className="topbar__search-icon" aria-hidden="true"></span>
+
         <input
           type="text"
           placeholder="Buscar archivos..."
@@ -73,7 +75,8 @@ export function Topbar({
           type="button"
           onClick={onUploadClick}
         >
-          Subir archivo
+          <span className="topbar__upload-icon" aria-hidden="true"></span>
+          <span>Subir archivo</span>
         </button>
 
         <ThemeToggle isDark={isDarkMode} onClick={onToggleTheme} />

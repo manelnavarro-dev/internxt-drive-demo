@@ -16,13 +16,11 @@
   transition: var(--transition-theme), transform 0.2s ease;
 }
 
-/*
 .file-card:hover {
   border-color: var(--color-primary);
   transform: translateY(-0.125rem);
   box-shadow: 0 0.75rem 1.875rem rgba(15, 23, 42, 0.08);
 }
-*/
 
 .file-card__top {
   display: flex;
@@ -32,14 +30,19 @@
 }
 
 .file-icon {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   display: grid;
   place-items: center;
-  border-radius: 0.875rem;
-  background-color: var(--color-primary-soft);
-  font-size: 1.25rem;
-  transition: var(--transition-theme);
+  border-radius: 0.75rem;
+  background-color: transparent;
+}
+
+.file-icon__image {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: block;
+  object-fit: contain;
 }
 
 .file-card__action {
@@ -53,11 +56,6 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: var(--transition-theme);
-}
-
-.file-card__action:hover {
-  background-color: transparent;
 }
 
 .file-card__content {
@@ -72,7 +70,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: var(--transition-theme);
 }
 
 .file-card__meta {
@@ -82,7 +79,6 @@
   gap: 0.25rem;
   color: var(--color-muted);
   font-size: 0.75rem;
-  transition: var(--transition-theme);
 }
 
 .file-list {
@@ -90,7 +86,6 @@
   border: 1px solid var(--color-border);
   border-radius: 1rem;
   background-color: var(--color-surface);
-  transition: var(--transition-theme);
 }
 
 .file-list__header {
@@ -102,7 +97,6 @@
   color: var(--color-muted);
   font-size: 0.7rem;
   font-weight: 600;
-  transition: var(--transition-theme);
 }
 
 .file-list__rows {
@@ -115,20 +109,19 @@
   grid-template-columns: minmax(0, 2fr) 1fr minmax(0, 1fr) 2rem;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.65rem 0.75rem;
-  border-bottom: 1px solid var(--color-border);
-  transition: var(--transition-theme);
+  padding: 0.25rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  border-bottom-color: var(--color-border);
+  background-color: var(--color-surface);
+  transition: var(--transition-theme), transform 0.2s ease;
 }
 
-.file-row:last-child {
-  border-bottom: 0;
-}
-
-/*
 .file-row:hover {
-  background-color: var(--color-primary-soft);
+  border-color: var(--color-primary);
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.75rem 1.875rem rgba(15, 23, 42, 0.08);
 }
-*/
 
 .file-row__main {
   min-width: 0;
@@ -138,33 +131,35 @@
 }
 
 .file-row .file-icon {
-  width: 1.875rem;
-  height: 1.875rem;
+  width: 1.625rem;
+  height: 1.625rem;
   flex-shrink: 0;
-  border-radius: 0.625rem;
-  font-size: 0.95rem;
+  border-radius: 0.5rem;
+}
+
+.file-row .file-icon__image {
+  width: 1rem;
+  height: 1rem;
 }
 
 .file-row__name {
   margin: 0;
   min-width: 0;
   color: var(--color-text);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: var(--transition-theme);
 }
 
 .file-row__size,
 .file-row__date {
   color: var(--color-muted);
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: var(--transition-theme);
 }
 
 .file-row__action {
@@ -178,11 +173,6 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: var(--transition-theme);
-}
-
-.file-row__action:hover {
-  background-color: transparent;
 }
 
 .empty-state {
@@ -195,7 +185,6 @@
   background-color: var(--color-surface);
   color: var(--color-muted);
   text-align: center;
-  transition: var(--transition-theme);
 }
 
 .empty-state p {
@@ -212,7 +201,7 @@
   width: 16px;
   height: 16px;
   display: block;
-  background-color: var(--color-icon);
+  background-color: var(--color-primary);
   mask-image: url('../assets/icons/delete_icon.svg');
   mask-repeat: no-repeat;
   mask-position: center;
@@ -221,12 +210,11 @@
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
   -webkit-mask-size: contain;
-  transition: var(--transition-theme);
 }
 
 .file-card__action:hover .file-card__delete-icon,
 .file-row__action:hover .file-row__delete-icon {
-  background-color: var(--color-danger);
+  background-color: var(--color-danger-hover);
 }
 
 .confirm-modal-backdrop {
@@ -248,33 +236,28 @@
   border-radius: 1.25rem;
   background-color: var(--color-surface);
   box-shadow: 0 1.5rem 4rem rgba(15, 23, 42, 0.25);
-  transition: var(--transition-theme);
 }
 
 .confirm-modal__title {
   margin: 0 0 0.75rem;
   color: var(--color-text);
   font-size: 1.15rem;
-  transition: var(--transition-theme);
 }
 
 .confirm-modal__text {
   margin: 0;
   color: var(--color-muted);
   font-size: 0.95rem;
-  transition: var(--transition-theme);
 }
 
 .confirm-modal__file-name {
   margin: 1rem 0 0;
   padding: 0.75rem;
   border-radius: 0.75rem;
-  background-color: var(--color-primary-soft);
   color: var(--color-text);
   font-size: 0.9rem;
   font-weight: 600;
   word-break: break-word;
-  transition: var(--transition-theme);
 }
 
 .confirm-modal__actions {
@@ -291,21 +274,20 @@
   padding: 0.7rem 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: var(--transition-theme);
 }
 
 .confirm-modal__cancel-button {
-  background-color: var(--color-primary-soft);
-  color: var(--color-text);
+  background-color: var(--color-muted);
+  color: var(--color-on-brand);
 }
 
 .confirm-modal__cancel-button:hover {
-  background-color: var(--color-surface-soft);
+  background-color: var(--color-brand);
 }
 
 .confirm-modal__delete-button {
   background-color: var(--color-danger);
-  color: var(--color-on-primary);
+  color: var(--color-on-brand);
 }
 
 .confirm-modal__delete-button:hover {
@@ -354,7 +336,6 @@
   .file-row {
     grid-template-columns: minmax(0, 3fr) 1fr minmax(0, 1fr) 2rem;
     gap: 1rem;
-    padding: 0.875rem 1rem;
   }
 
   .file-row__name {
