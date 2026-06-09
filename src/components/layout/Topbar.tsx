@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { ThemeToggle } from '../ui/ThemeToggle'
 
 type TopbarProps = {
@@ -17,6 +18,35 @@ export function Topbar({
   onUploadClick,
   onMenuClick,
 }: TopbarProps) {
+  const [isAvatarMenuOpen, setIsAvatarMenuOpen] = useState(false)
+
+  const avatarMenuRef = useRef<HTMLDivElement | null>(null)
+
+  function handleToggleAvatarMenu() {
+    setIsAvatarMenuOpen((currentValue) => !currentValue)
+  }
+
+  function handleCloseAvatarMenu() {
+    setIsAvatarMenuOpen(false)
+  }
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        avatarMenuRef.current &&
+        !avatarMenuRef.current.contains(event.target as Node)
+      ) {
+        handleCloseAvatarMenu()
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
   return (
     <header className="topbar">
       <button
@@ -48,15 +78,28 @@ export function Topbar({
 
         <ThemeToggle isDark={isDarkMode} onClick={onToggleTheme} />
 
-        <div className="topbar__avatar">
-          <button className="topbar__avatar-button" type="button">
+        <div className="topbar__avatar" ref={avatarMenuRef}>
+          <button
+            className="topbar__avatar-button"
+            type="button"
+            aria-label="Abrir menú de usuario"
+            aria-expanded={isAvatarMenuOpen}
+            onClick={handleToggleAvatarMenu}
+          >
             <img src="/avatar.jpg" alt="Avatar de usuario" />
           </button>
 
-          <div className="topbar__dropdown">
-            <button type="button">Perfil</button>
-            <button type="button">Cerrar sesión</button>
-          </div>
+          {isAvatarMenuOpen && (
+            <div className="topbar__dropdown">
+              <button type="button" onClick={handleCloseAvatarMenu}>
+                Perfil
+              </button>
+
+              <button type="button" onClick={handleCloseAvatarMenu}>
+                Cerrar sesión
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>
