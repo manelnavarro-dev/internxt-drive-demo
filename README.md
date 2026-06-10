@@ -6,7 +6,7 @@ El objetivo del proyecto es construir un dashboard limpio, responsive y con buen
 
 ## Demo
 
-Pendiente de despliegue en Netlify.
+https://internxt-drive-demo-manel.netlify.app
 
 ## Tecnologías utilizadas
 
@@ -14,7 +14,10 @@ Pendiente de despliegue en Netlify.
 * Vite
 * TypeScript
 * CSS
-* Estado local con `useState`
+* Git y GitHub
+* Netlify
+
+Se ha elegido un stack tecnológico basado en React, TypeScript y Vite con el objetivo de trabajar con una base moderna de frontend, cercana al tipo de tecnologías utilizadas habitualmente en proyectos web actuales y alineada con el enfoque técnico de la prueba.
 
 ## Funcionalidades implementadas
 
@@ -32,6 +35,7 @@ Pendiente de despliegue en Netlify.
   * Botón para subir archivos
   * Avatar de usuario con menú desplegable
   * Botón para cambiar entre modo claro y oscuro
+* Topbar fija mediante `position: sticky`, para mantener visibles el buscador y las acciones principales al hacer scroll.
 * Vista de archivos en modo grid.
 * Vista de archivos en modo lista.
 * Cambio entre vista grid y vista lista.
@@ -57,6 +61,7 @@ Pendiente de despliegue en Netlify.
   * En móvil se oculta y se abre mediante botón hamburguesa.
 * Modo claro y oscuro mediante variables CSS.
 * Diseño responsive y mobile-first.
+* Despliegue en Netlify.
 
 ## Cómo ejecutar el proyecto
 
@@ -162,11 +167,17 @@ No se necesita botón de búsqueda porque el filtrado se realiza directamente so
 
 ### Ordenación en vista lista
 
-La ordenación se ha implementado en la vista lista, usando los propios encabezados de la tabla como controles.
+La ordenación se ha implementado en la vista lista usando los propios encabezados de la tabla como controles.
 
 El usuario puede ordenar por nombre, tamaño o fecha. Al volver a pulsar sobre el mismo campo, se cambia entre orden ascendente y descendente.
 
 Esta funcionalidad se ha dejado solo en la vista lista porque encaja mejor con el comportamiento habitual de una tabla de archivos.
+
+### Topbar fija
+
+La topbar se ha configurado con `position: sticky` para que permanezca visible al hacer scroll.
+
+Esto mejora la experiencia de usuario en vistas con muchos archivos, ya que permite mantener accesibles en todo momento el buscador, el botón de subida, el cambio de tema y el menú de usuario.
 
 ### Modo oscuro
 
@@ -180,17 +191,62 @@ La interfaz se ha planteado siguiendo un enfoque mobile-first.
 
 En móvil la sidebar está oculta por defecto y se abre mediante un botón hamburguesa. En escritorio la sidebar permanece visible.
 
+### Normalize.css
+
+Se ha incluido `normalize.css` para unificar los estilos base entre navegadores.
+
+Los navegadores aplican estilos por defecto diferentes a elementos como botones, inputs, listas o márgenes del documento. Usar una normalización CSS ayuda a partir de una base más consistente y evita diferencias visuales inesperadas entre navegadores.
+
+A partir de esa base se han definido los estilos propios del proyecto mediante CSS personalizado y variables CSS.
+
+### Control de versiones
+
+Durante el desarrollo se ha utilizado Git para dividir el trabajo en commits pequeños y progresivos.
+
+Esto ha permitido organizar mejor el avance del proyecto, mantener un historial claro de cambios y facilitar la revisión del proceso de desarrollo.
+
+## Proceso de desarrollo
+
+El proyecto se ha desarrollado en aproximadamente 12 horas.
+
+Aunque el plazo de entrega permitía disponer de más tiempo, durante estos días también he tenido que avanzar con la memoria de mi TFG, por lo que he intentado organizar el desarrollo priorizando las funcionalidades obligatorias, el diseño responsive, el modo oscuro, la ordenación y el despliegue.
+
+Durante el proceso se ha trabajado por fases:
+
+1. Creación del proyecto con Vite, React y TypeScript.
+2. Maquetación inicial del dashboard.
+3. Creación de componentes reutilizables.
+4. Implementación de datos iniciales.
+5. Vista grid y vista lista.
+6. Búsqueda en tiempo real.
+7. Subida simulada de archivos.
+8. Eliminación con confirmación.
+9. Responsive y modo oscuro.
+10. Ordenación en vista lista.
+11. Pulido visual.
+12. Topbar fija.
+13. Despliegue en Netlify.
+
+Al tratarse de tecnologías en las que todavía estoy ganando experiencia, utilicé herramientas de IA como apoyo durante el proceso para resolver dudas, revisar errores y entender mejor algunas decisiones de implementación. El código final fue revisado, probado y ajustado manualmente.
+
 ## Mejoras futuras
 
 Si tuviera más tiempo, añadiría:
 
 * Drag & Drop para subir archivos.
 * Preview de imágenes al hacer clic.
+* Persistencia con `localStorage`.
 * Paginación o scroll infinito para listas grandes.
 * Tests unitarios con React Testing Library.
+* Mejoras de accesibilidad en navegación por teclado.
+* Conexión con una API real para persistir archivos.
+
+## Nota final
+
+Espero que el resultado sea de vuestro agrado.
+
+La prueba me ha parecido una buena oportunidad para seguir aprendiendo y poner en práctica tecnologías frontend modernas. Además, me interesa mucho la oferta de prácticas y la posibilidad de formar parte de un entorno donde pueda seguir mejorando, aprender de un equipo real y aportar todo lo posible desde el primer día.
 
 ## Autor
-
-Manel Navarro Torrijos
 
 Proyecto desarrollado como prueba técnica frontend para Internxt.
